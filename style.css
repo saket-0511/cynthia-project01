@@ -1,6 +1,6 @@
 @font-face {
     font-family: "General Sans";
-    src: url("./GeneralSans-Medium.woff2") format("woff2");
+    src: url("./fonts/GeneralSans-Medium.woff2") format("woff2");
     font-weight: 500;
 }
 
@@ -8,7 +8,7 @@
     margin: 0;
     padding: 0;
     font-family: "General Sans", sans-serif;
-    box-sizing: border-box; /* ✅ Fixed: was "norder-box" */
+    box-sizing: border-box;
 }
 
 html, body {
@@ -17,16 +17,42 @@ html, body {
     height: 100%;
 }
 
+.bounding {
+    width: fit-content;
+    background-color: black;
+    overflow: hidden;
+}
+
+.bounding .boundingelem {
+    transform: translateY(100%);
+}
+
+#minicircle {
+    transition: transform cubic-bezier(0.19, 1, 0.22, 1) 0.6s;
+    width: 10px;
+    height: 10px;
+    position: fixed;
+    z-index: 99999;
+    border-radius: 50%;
+    background-color: white;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+}
+
 #main {
     width: 100%;
+    background-color: #000;
 }
+
+/* ===================== HERO ===================== */
 
 #hero {
     color: #fff;
     width: 100%;
     height: 100vh;
     background-color: black;
-    position: relative; /* ✅ Fixed: needed for absolute children (#herofooter, #chhotiheadings) */
+    position: relative;
 }
 
 #nav {
@@ -44,7 +70,32 @@ html, body {
     color: #fff;
 }
 
-/* ✅ Fixed: removed duplicate/nested #heading { #heading { ... } } */
+#nav h4 {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+#chhotiheadings {
+    position: absolute;
+    right: 3vw;
+    top: 45%;
+    text-transform: uppercase;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+#chhotiheadings h5 {
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
 #heading {
     margin-top: 90px;
     padding-left: 40px;
@@ -65,19 +116,11 @@ html, body {
     margin-left: 180px;
 }
 
-#nav h4 {
-    position: absolute;
-    right: 40px;
-    top: 30px;
-    color: white;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    cursor: pointer;
-}
-
 .blocktext {
     width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }
 
 .blocktext h5 {
@@ -87,43 +130,6 @@ html, body {
     letter-spacing: 1px;
     font-family: "General Sans", sans-serif;
     font-weight: 400;
-}
-
-/* ✅ Fixed: moved #chhotiheadings positioning here — it was placed outside #hero in HTML */
-#chhotiheadings {
-    position: absolute;
-    top: 30px;
-    right: 120px; /* sits left of the MENU button */
-    text-transform: uppercase;
-    text-align: right;
-    font-size: 1vw;
-}
-
-#chhotiheadings h5 {
-    font-size: 11px;
-    letter-spacing: 1px;
-    font-weight: 400;
-    opacity: 0.8;
-}
-
-#herofooter a {
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.8;
-}
-
-#herofooter a:hover i {
-    transform: translate(3px, -3px);
-    transition: 0.3s;
-}
-
-#herofooter a i {
-    margin-left: 5px;
-    font-size: 14px;
-    vertical-align: middle;
 }
 
 #herofooter {
@@ -136,6 +142,27 @@ html, body {
     justify-content: space-between;
 }
 
+#herofooter a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+#herofooter a i {
+    margin-left: 5px;
+    font-size: 14px;
+    vertical-align: middle;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+#herofooter a:hover i {
+    transform: translate(3px, -3px);
+}
+
 #herofooter .circle {
     display: flex;
     align-items: center;
@@ -144,7 +171,6 @@ html, body {
     height: 25px;
     background-color: #888;
     border-radius: 50%;
-    /* ✅ Fixed: removed transform: translateX(-50px) which was pushing circles off-screen */
 }
 
 #herofooter #iconset {
@@ -153,12 +179,12 @@ html, body {
     gap: 10px;
 }
 
+/* ===================== SECOND SECTION ===================== */
+
 #second {
-    padding-right: 10vw;
-    padding-top: 200px;
     width: 100%;
-    height: 100vh;
     background-color: black;
+    padding: 80px 0 80px 3vw;
 }
 
 .elem {
@@ -166,17 +192,140 @@ html, body {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 3.5vw 3vw;
-    padding-right: 0;
+    padding: 2vw 3vw 2vw 0;
     border-top: 1px solid #888;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.elemlast {
+    border-bottom: 1px solid #888;
 }
 
 .elem h1 {
     text-transform: uppercase;
     font-size: 7.6vw;
-    opacity: .7;
+    font-weight: 500;
+    opacity: 0.7;
+    flex: 1;
+    padding-left: 3vw;
+    transition: opacity 0.4s ease;
+    position: relative;
+    z-index: 1;
 }
 
-.elemlast{
-    border-bottom: 1px solid #888;
+.elem:hover h1 {
+    opacity: 1;
+}
+
+.elem h5 {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+/* ✅ FIXED: was display:none — GSAP cannot animate display:none elements */
+.elem img {
+    opacity: 0;                  /* invisible by default, animated by GSAP */
+    width: 320px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;        /* don't block mouse events on the elem */
+    top: 0;
+    left: 0;
+    will-change: transform, opacity;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+#about {
+    width: 100%;
+    padding: 10vw 10vw;
+    background-color: black;
+    color: white;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 40vw;
+}
+
+#about img {
+    width: 200px;
+}
+
+#textabout {
+    width: 205rem;
+}
+
+#textabout h5 {
+    text-transform: uppercase;
+    opacity: .6;
+    margin-bottom: 10px;
+}
+
+#textabout p {
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+#textabout a {
+    padding: 12px 22px;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none;
+    border-radius: 100px;
+    display: inline-block;
+}
+
+#subscribe {
+    color: white;
+    padding: 20px 30px;
+    background-color: #000;
+}
+
+#subscribe h5 {
+    text-transform: uppercase;
+    opacity: .6;
+}
+
+#subscribe h3 {
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    background-color: black;
+    color: white;
+}
+
+#footerleft {
+    display: flex;
+    gap: 20px;
+}
+
+#footerright {
+    display: flex;
+    gap: 30px;
+}
+
+#footer a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
 }
